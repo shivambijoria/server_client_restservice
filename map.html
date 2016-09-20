@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+	<button id='b1'>Get Data</button>
+	<button onclick="drawmap()">Display map</button>
+    <div id="map"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+		
+	$(document).ready(function(){
+    $("#b1").click(function(){
+        
+		
+
+$.ajax({
+      type: 'GET',
+      url: 'http://localhost:8080/map',
+      crossDomain: true,
+      data: {},
+      cache: false,
+      success: function(data) {
+	  
+	  
+	  
+	
+		lat1=data.location[0].lat;
+		lat2=data.location[1].lat;
+		lat3=data.location[2].lat;
+		
+		lng1=data.location[0].lng;
+		lng2=data.location[1].lng;
+		lng3=data.location[2].lng;
+		
+		
+		
+	  }
+    });
+
+	///
+	
+	    });
+});
+		
+      function drawmap() {
+        var myLatLng = {lat: lat1, lng: lng1};
+		var myLatLng2 = {lat: lat2, lng: lng2};
+		var myLatLng3 = {lat: lat3, lng: lng3};
+		
+		
+
+		
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 2,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+		
+		var marker = new google.maps.Marker({
+          position: myLatLng2,
+          map: map,
+          title: 'Hello World!'
+        });
+		
+		var marker = new google.maps.Marker({
+          position: myLatLng3,
+          map: map,
+          title: 'Hello World!'
+        });
+		
+		
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5Vhwvm7xgwBZUb1VnZg2iuy0HzvwRpOY">
+    </script>
+	
+  </body>
+</html>

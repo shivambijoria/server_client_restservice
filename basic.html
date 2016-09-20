@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<h1>COUNTRIES AND THEIR POPULATION </h1>
+<div id="id01"></div>
+<div id="id02"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        
+		
+
+$.ajax({
+      type: 'GET',
+      url: 'http://localhost:8080/api',
+      crossDomain: true,
+      data: {},
+      cache: false,
+      success: function(data) {
+
+      console.log(data);  
+		var i;
+    var out = "<table>";
+
+    for(i = 0; i < data.length; i++) {
+        out += "<tr><td>" + 
+        data[i].Country +
+        "</td><td>" +
+        data[i].Population +
+        "</td><td>" ;
+    }
+    out += "</table>";
+    document.getElementById("id01").innerHTML = out;
+	
+	
+    var out2 = '<ul style="list-style-type:square">';
+
+    for(i = 0; i < data.length; i++) {
+        out2 += "<li>" + 
+        data[i].Country + '-' + data[i].Population
+        "</li>" ;
+    }
+    out2 += "</ul>";
+    document.getElementById("id02").innerHTML = out2;
+		
+		
+	  }
+    });
+
+
+		
+    });
+});
+</script>
+</head>
+<body>
+
+<button>Send an HTTP GET request to a page and get the result back</button>
+
+</body>
+</html>
